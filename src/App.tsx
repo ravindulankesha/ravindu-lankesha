@@ -35,7 +35,7 @@ function App() {
       <div className="min-h-screen w-full bg-background text-background">
 
         {/* Simple Navbar */}
-        <nav className="px-8 py-4 gap-4 flex bg-foreground items-center">
+        <nav className="px-4 py-4 gap-4 flex bg-foreground items-center">
           
             {/* Hamburger button for mobile */}
             <Button 
@@ -66,15 +66,15 @@ function App() {
           </div>
             <div
               ref={menuRef}
-              className={`sm:hidden py-6 flex flex-col gap-4 w-fit bg-foreground pl-8 pr-14 absolute top-16 left-0 z-10
+                className={`sm:hidden flex flex-col gap-4 w-fit bg-foreground absolute top-16 left-0 z-10
                 transform transition-all duration-300 ease-in-out
                 ${isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"}`}
             >
-              <Link to="/Home" className="text-background hover:text-muted-foreground" onClick={() => setIsOpen(false)}>Home</Link>
-              <Link to="/" className="text-background hover:text-muted-foreground" onClick={() => setIsOpen(false)}>About</Link>
-              <Link to="/" className="text-background hover:text-muted-foreground" onClick={() => setIsOpen(false)}>Projects</Link>
-              <Link to="/" className="text-background hover:text-muted-foreground" onClick={() => setIsOpen(false)}>Skills</Link>
-              <Link to="/" className="text-background hover:text-muted-foreground" onClick={() => setIsOpen(false)}>Contact</Link>
+              <Link to="/Home" className="block w-full text-background hover:text-muted-foreground cursor-pointer pt-4 pl-6 pr-10"  onClick={() => setIsOpen(false)}>Home</Link>
+              <Link to="/" className="block w-full text-background hover:text-muted-foreground cursor-pointer py-2 pl-6 pr-10" onClick={() => setIsOpen(false)}>About</Link>
+              <Link to="/" className="block w-full text-background hover:text-muted-foreground cursor-pointer py-2 pl-6 pr-10" onClick={() => setIsOpen(false)}>Projects</Link>
+              <Link to="/" className="block w-full text-background hover:text-muted-foreground cursor-pointer py-2 pl-6 pr-10" onClick={() => setIsOpen(false)}>Skills</Link>
+              <Link to="/" className="block w-full text-background hover:text-muted-foreground cursor-pointer pb-4 pl-6 pr-10" onClick={() => setIsOpen(false)}>Contact</Link>
             </div>
             <div className="ml-auto"><ModeToggle /></div>
         </nav>
