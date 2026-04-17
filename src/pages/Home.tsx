@@ -158,7 +158,7 @@ export default function Home() {
 
         {/* EMAIL BUTTON */}
         <Button size="lg" asChild className="hover:scale-105 transition">
-          <a href="mailto:your@email.com">
+          <a href="mailto:ravindulankesha@email.com">
             Email Me
           </a>
         </Button>
@@ -167,7 +167,7 @@ export default function Home() {
         <div className="flex justify-center gap-6 text-sm text-muted-foreground pt-4">
 
           <a
-            href="https://linkedin.com/in/your-profile"
+            href="https://www.linkedin.com/in/ravindu-weerathunga-3565b8195/"
             target="_blank"
             className="hover:text-foreground transition"
           >
