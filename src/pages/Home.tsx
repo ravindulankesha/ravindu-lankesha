@@ -27,8 +27,20 @@ export default function Home() {
           </p>
 
           <div className="flex gap-4">
-            <Button>View Work</Button>
-            <Button variant="outline">Contact Me</Button>
+            <Button onClick={() => {
+              document.getElementById("designs")?.scrollIntoView({ behavior: "smooth" });
+            }}>
+              View Work
+            </Button>
+
+            <Button
+              variant="outline"
+              onClick={() => {
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Contact Me
+            </Button>
           </div>
         </div>
 
@@ -144,9 +156,34 @@ export default function Home() {
           I’m open to UX/UI design roles and freelance opportunities.
         </p>
 
-        <Button size="lg" className="hover:scale-105 transition">
-          Contact Me
+        {/* EMAIL BUTTON */}
+        <Button size="lg" asChild className="hover:scale-105 transition">
+          <a href="mailto:your@email.com">
+            Email Me
+          </a>
         </Button>
+
+        {/* SOCIAL LINKS */}
+        <div className="flex justify-center gap-6 text-sm text-muted-foreground pt-4">
+
+          <a
+            href="https://linkedin.com/in/your-profile"
+            target="_blank"
+            className="hover:text-foreground transition"
+          >
+            LinkedIn
+          </a>
+
+          <a
+            href="https://github.com/your-username"
+            target="_blank"
+            className="hover:text-foreground transition"
+          >
+            GitHub
+          </a>
+
+        </div>
+
       </section>
 
     </div>
