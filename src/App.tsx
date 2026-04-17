@@ -1,16 +1,16 @@
-import { Routes, Route, Link } from "react-router-dom"
-import Home from "./pages/Home"
-import { Button } from "./components/ui/button.js";
 import { ThemeProvider } from "./components/theme-provider";
 import { ModeToggle } from "./components/ui/mode-toggle";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import avatar from "./assets/avatar.png";
 import { useState, useEffect, useRef } from "react";
+import Home from "./pages/Home";
+import { Button } from "./components/ui/button";
 
-function App() {
+export default function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);       // div for mobile menu
-  const buttonRef = useRef<HTMLButtonElement>(null);  
+
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -25,70 +25,71 @@ function App() {
     }
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen w-full bg-background text-background">
+      <div className="min-h-screen bg-background text-foreground">
 
-        {/* Simple Navbar */}
-        <nav className="px-4 py-4 gap-4 flex bg-foreground items-center">
-          
-            {/* Hamburger button for mobile */}
-            <Button 
-              ref={buttonRef} 
-              onClick={() => setIsOpen(!isOpen)}
-              className="sm:hidden border-none ring-0 focus:outline-none"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </Button>
-          <Avatar>
-            <AvatarImage src={avatar} alt="User avatar" />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className="flex items-center gap-16">
-            <p className="text-background"><i>Ravindu Lankesha</i></p>
+        {/* NAVBAR */}
+        <nav className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 border-b bg-background/80 backdrop-blur">
 
-            {/* Desktop links */}
-            <div className="hidden sm:flex gap-6">
-              <Link to="/" className="text-background hover:text-muted-foreground">Home</Link>
-              <Link to="/" className="text-background hover:text-muted-foreground">About</Link>
-              <Link to="/" className="text-background hover:text-muted-foreground">Projects</Link>
-              <Link to="/" className="text-background hover:text-muted-foreground">Skills</Link>
-              <Link to="/" className="text-background hover:text-muted-foreground">Contact</Link>
-            </div>
+          {/* LEFT */}
+          <div className="flex items-center gap-3">
+            <Avatar>
+              <AvatarImage src={avatar} />
+              <AvatarFallback>RV</AvatarFallback>
+            </Avatar>
 
+            <p className="font-semibold">Ravindu Weerathunga</p>
           </div>
-            <div
-              ref={menuRef}
-                className={`sm:hidden flex flex-col gap-4 w-fit bg-foreground absolute top-16 left-0 z-10
-                transform transition-all duration-300 ease-in-out
-                ${isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"}`}
+
+          {/* DESKTOP NAV */}
+          <div className="hidden md:flex gap-6 text-sm text-muted-foreground">
+            <a href="#about" className="hover:text-foreground">About</a>
+            <a href="#focus" className="hover:text-foreground">Focus</a>
+            <a href="#skills" className="hover:text-foreground">Skills</a>
+            <a href="#designs" className="hover:text-foreground">Design Work</a>
+            <a href="#contact" className="hover:text-foreground">Contact</a>
+          </div>
+
+          {/* RIGHT */}
+          <div className="flex items-center gap-3">
+            <ModeToggle />
+
+            {/* MOBILE BUTTON */}
+            <Button
+              ref={buttonRef}
+              onClick={() => setIsOpen(!isOpen)}
+              className="md:hidden"
             >
-              <Link to="/Home" className="block w-full text-background hover:text-muted-foreground cursor-pointer pt-4 pl-6 pr-10"  onClick={() => setIsOpen(false)}>Home</Link>
-              <Link to="/" className="block w-full text-background hover:text-muted-foreground cursor-pointer py-2 pl-6 pr-10" onClick={() => setIsOpen(false)}>About</Link>
-              <Link to="/" className="block w-full text-background hover:text-muted-foreground cursor-pointer py-2 pl-6 pr-10" onClick={() => setIsOpen(false)}>Projects</Link>
-              <Link to="/" className="block w-full text-background hover:text-muted-foreground cursor-pointer py-2 pl-6 pr-10" onClick={() => setIsOpen(false)}>Skills</Link>
-              <Link to="/" className="block w-full text-background hover:text-muted-foreground cursor-pointer pb-4 pl-6 pr-10" onClick={() => setIsOpen(false)}>Contact</Link>
-            </div>
-            <div className="ml-auto"><ModeToggle /></div>
+              ☰
+            </Button>
+          </div>
+
+          {/* MOBILE MENU */}
+          <div
+            ref={menuRef}
+            className={`absolute top-16 left-0 w-full bg-background border-b flex flex-col gap-4 p-4 md:hidden transition-all ${
+              isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+            }`}
+          >
+            <a href="#about" onClick={() => setIsOpen(false)}>About</a>
+            <a href="#focus" onClick={() => setIsOpen(false)}>Focus</a>
+            <a href="#skills" onClick={() => setIsOpen(false)}>Skills</a>
+            <a href="#designs" onClick={() => setIsOpen(false)}>Design Work</a>
+            <a href="#contact" onClick={() => setIsOpen(false)}>Contact</a>
+          </div>
+
         </nav>
 
-        {/* Page Routes */}
-        <div className="p-8">
-          <Routes>
-            <Route path="/Home" element={<Home />} />
-          </Routes>
-        </div>
-        
+        {/* PAGE */}
+        <main className="px-6 py-10">
+          <Home />
+        </main>
+
       </div>
     </ThemeProvider>
-  )
+  );
 }
-
-export default App
