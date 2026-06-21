@@ -22,7 +22,7 @@ export default function Home() {
           </h1>
 
           <p className="text-xl text-muted-foreground">
-            UX/UI Designer & Software Engineer focused on building
+            Software Engineer focused on building
             clean, intuitive, and user-centered digital experiences.
           </p>
 
